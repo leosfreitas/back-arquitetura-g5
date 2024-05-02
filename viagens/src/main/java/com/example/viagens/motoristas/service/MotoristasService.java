@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MotoristasService {
@@ -58,5 +59,26 @@ public class MotoristasService {
         }
 
         return motoristasRepository.save(motorista);
+    }
+
+    public Motoristas retornaDisponivel(){
+        return motoristasRepository.findByStatusOcupacao("DISPONIVEL");
+    }
+
+    public Motoristas mudaStatus(Integer id){
+        Optional<Motoristas>  motorista = motoristasRepository.findById(id)
+        if(motorista.isEmpty()){
+            throw new RuntimeException("Motorista não encontrado!");
+
+        }
+        if(motorista.get().getStatusOcupacao().equals("DISPONIVEL")){
+            throw new RuntimeException("Motorista já disponível!");
+        }
+        else{
+            motorista.get().setStatusOcupacao("DISPONIVEL");
+            return motorista.get();
+        }
+
+
     }
 }

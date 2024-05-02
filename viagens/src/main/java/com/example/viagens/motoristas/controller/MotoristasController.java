@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class MotoristasController {
@@ -41,6 +42,14 @@ public class MotoristasController {
         return motoristasService.editarMotorista(id, nome, cpf, placaVeiculo, modeloVeiculo, precoViagem, statusOcupacao);
     }
 
+    @GetMapping("motoristas/disponivel")
+    public Motoristas retornaDisponivel(){
+        return motoristasService.retornaDisponivel();
+    }
 
+    @PutMapping("motoristas/{id}/status")
+    public Motoristas mudaStatus(@PathVariable Integer id){
+        return motoristasService.mudaStatus(id);
+    }
 
 }
