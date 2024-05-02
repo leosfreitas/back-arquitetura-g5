@@ -26,7 +26,7 @@ public class MotoristasController {
         return motoristasService.cadastrarMotoristas(motoristas);
     }
 
-    @DeleteMapping("/motoristas")
+    @DeleteMapping("/motoristas/{id}")
     public Motoristas deleteMotoristas(@RequestParam(required = true) Integer id) {
         return motoristasService.excluirMotorista(id);
     }
