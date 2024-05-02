@@ -66,7 +66,7 @@ public class MotoristasService {
     }
 
     public Motoristas mudaStatus(Integer id){
-        Optional<Motoristas>  motorista = motoristasRepository.findById(id)
+        Optional<Motoristas>  motorista = motoristasRepository.findById(id);
         if(motorista.isEmpty()){
             throw new RuntimeException("Motorista não encontrado!");
 
@@ -76,7 +76,7 @@ public class MotoristasService {
         }
         else{
             motorista.get().setStatusOcupacao("DISPONIVEL");
-            return motorista.get();
+            return motoristasRepository.save(motorista.get());
         }
 
 
