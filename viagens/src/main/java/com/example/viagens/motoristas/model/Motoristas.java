@@ -4,14 +4,20 @@ import jakarta.persistence.*;
 
 @Entity
 public class Motoristas {
-    @RequestParam(required = false) String nome,
-    @RequestParam(required = false) String cpf,
-    @RequestParam(required = false) String placaVeiculo,
-    @RequestParam(required = false) String modeloVeiculo,
-    @RequestParam(required = false) double precoViagem,
-    @RequestParam(required = false) String statusOcupacao)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @Column(nullable = false)
-    private double precoViagem;
+    private String nome;
+    @Column(unique = true, nullable = false)
+    private String cpf;
+    @Column(unique = true, nullable = false)
+    private String placaVeiculo;
+    @Column(nullable = false)
+    private String modeloVeiculo;
+    @Column(nullable = false)
+    private Double precoViagem;
     @Column(nullable = false)
     private String statusOcupacao;
 

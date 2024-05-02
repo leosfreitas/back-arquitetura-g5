@@ -33,7 +33,7 @@ public class MotoristasService {
         return motorista;
     }
 
-    public Motoristas editarMotorista(Integer id, String nome, String cpf, String placaVeiculo, String modeloVeiculo, double precoViagem, String statusOcupacao) {
+    public Motoristas editarMotorista(Integer id, String nome, String cpf, String placaVeiculo, String modeloVeiculo, Double precoViagem, String statusOcupacao) {
         Motoristas motorista = motoristasRepository.findById(id).orElse(null);
         if (motorista == null) {
             throw new RuntimeException("Motorista não encontrado!");
