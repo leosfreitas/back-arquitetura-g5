@@ -17,7 +17,7 @@ public class Motoristas {
     @Column(nullable = false)
     private String modeloVeiculo;
     @Column(nullable = false)
-    private double precoViagem;
+    private Double precoViagem;
     @Column(nullable = false)
     private String statusOcupacao;
 
