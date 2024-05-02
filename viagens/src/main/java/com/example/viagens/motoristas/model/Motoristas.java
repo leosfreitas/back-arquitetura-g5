@@ -24,13 +24,22 @@ public class Motoristas {
     public Motoristas() {
     }
 
-    public Motoristas(String nome, String cpf, String placaVeiculo, String modeloVeiculo, double precoViagem, String statusOcupacao) {
+    public Motoristas(Integer id, String nome, String cpf, String placaVeiculo, String modeloVeiculo, double precoViagem, String statusOcupacao) {
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.placaVeiculo = placaVeiculo;
         this.modeloVeiculo = modeloVeiculo;
         this.precoViagem = precoViagem;
         this.statusOcupacao = statusOcupacao;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
