@@ -25,19 +25,19 @@ public class MotoristasController {
         return motoristasService.cadastrarMotoristas(motoristas);
     }
 
-    @DeleteMapping("/motoristas")
+    @DeleteMapping("/motoristas/{id}")
     public Motoristas deleteMotoristas(@RequestParam(required = true) Integer id) {
         return motoristasService.excluirMotorista(id);
     }
 
     @PutMapping("/motoristas/{id}")
     public Motoristas editMotoristas(@PathVariable Integer id,
-                                     @RequestParam String nome,
-                                     @RequestParam String cpf,
-                                     @RequestParam String placaVeiculo,
-                                     @RequestParam String modeloVeiculo,
-                                     @RequestParam double precoViagem,
-                                     @RequestParam String statusOcupacao){
+                                     @RequestParam(required = false) String nome,
+                                     @RequestParam(required = false) String cpf,
+                                     @RequestParam(required = false) String placaVeiculo,
+                                     @RequestParam(required = false) String modeloVeiculo,
+                                     @RequestParam(required = false) double precoViagem,
+                                     @RequestParam(required = false) String statusOcupacao){
         return motoristasService.editarMotorista(id, nome, cpf, placaVeiculo, modeloVeiculo, precoViagem, statusOcupacao);
     }
 
