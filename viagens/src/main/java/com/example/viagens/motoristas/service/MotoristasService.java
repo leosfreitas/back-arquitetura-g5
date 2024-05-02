@@ -23,8 +23,8 @@ public class MotoristasService {
         return motoristasRepository.findAll();
     }
 
-    public Motoristas excluirMotorista(Motoristas motorista) {
-        Motoristas motoristas = motoristasRepository.findById(id).orElse(null);
+    public Motoristas excluirMotorista(Integer id) {
+        Motoristas motorista = motoristasRepository.findById(id).orElse(null);
         if (motorista == null) {
             throw new RuntimeException("Motorista não encontrado!");
         }
