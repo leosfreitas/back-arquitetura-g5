@@ -74,11 +74,11 @@ public class Motoristas {
         this.modeloVeiculo = modeloVeiculo;
     }
 
-    public double getPrecoViagem() {
+    public Double getPrecoViagem() {
         return precoViagem;
     }
 
-    public void setPrecoViagem(double precoViagem) {
+    public void setPrecoViagem(Double precoViagem) {
         this.precoViagem = precoViagem;
     }
 

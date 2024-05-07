@@ -14,6 +14,7 @@ public class MotoristasService {
     private MotoristasRepository motoristasRepository;
 
     public Motoristas cadastrarMotoristas(Motoristas motorista) {
+        motorista.setStatusOcupacao("DISPONIVEL");
         return motoristasRepository.save(motorista);
     }
 
@@ -24,45 +25,37 @@ public class MotoristasService {
         return motoristasRepository.findAll();
     }
 
-    public Motoristas excluirMotorista(Integer id) {
+    public void excluirMotorista(Integer id) {
         Motoristas motorista = motoristasRepository.findById(id).orElse(null);
         if (motorista == null) {
             throw new RuntimeException("Motorista não encontrado!");
         }
         motoristasRepository.delete(motorista);
-        return motorista;
     }
 
-    public Motoristas editarMotorista(Integer id, String nome, String cpf, String placaVeiculo, String modeloVeiculo, Double precoViagem) {
-        Motoristas motorista = motoristasRepository.findById(id).orElse(null);
-        if (motorista == null) {
+    public Motoristas editarMotorista(Integer id, Motoristas motorista) {
+        Motoristas motoristaEditado = motoristasRepository.findById(id).orElse(null);
+        if (motoristaEditado == null) {
             throw new RuntimeException("Motorista não encontrado!");
         }
+        if (motorista.getNome() != null){
+            motoristaEditado.setNome(motorista.getNome());}
+        if (motorista.getCpf() != null){
+            motoristaEditado.setCpf(motorista.getCpf());}
+        if (motorista.getPlacaVeiculo() != null){
+            motoristaEditado.setPlacaVeiculo(motorista.getPlacaVeiculo());}
+        if (motorista.getModeloVeiculo() != null){
+            motoristaEditado.setModeloVeiculo(motorista.getModeloVeiculo());}
+        if (motorista.getPrecoViagem() != null){
+            motoristaEditado.setPrecoViagem(motorista.getPrecoViagem());}
 
-        if (nome != null) {
-            motorista.setNome(nome);
-        }
-        if (cpf != null) {
-            motorista.setCpf(cpf);
-        }
-        if (placaVeiculo != null) {
-            motorista.setPlacaVeiculo(placaVeiculo);
-        }
-        if (modeloVeiculo != null) {
-            motorista.setModeloVeiculo(modeloVeiculo);
-        }  
-        if (precoViagem != null) {
-            motorista.setPrecoViagem(precoViagem);
-        }
-
-        return motoristasRepository.save(motorista);
+        return motoristasRepository.save(motoristaEditado);
     }
 
     public Motoristas retornaDisponivel() {
         for (Motoristas motorista : motoristasRepository.findAll()) {
             if (motorista.getStatusOcupacao().equals("DISPONIVEL")) {
-                List<Motoristas> motoristas = motoristasRepository.findAll();
-                return motoristas.getFirst();
+                return motorista;
             }
         }
         throw new RuntimeException("Nenhum motorista disponível!");
