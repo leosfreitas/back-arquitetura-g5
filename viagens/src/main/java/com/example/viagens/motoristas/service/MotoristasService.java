@@ -33,7 +33,7 @@ public class MotoristasService {
         return motorista;
     }
 
-    public Motoristas editarMotorista(Integer id, String nome, String cpf, String placaVeiculo, String modeloVeiculo, Double precoViagem, String statusOcupacao) {
+    public Motoristas editarMotorista(Integer id, String nome, String cpf, String placaVeiculo, String modeloVeiculo, Double precoViagem) {
         Motoristas motorista = motoristasRepository.findById(id).orElse(null);
         if (motorista == null) {
             throw new RuntimeException("Motorista não encontrado!");
@@ -51,11 +51,8 @@ public class MotoristasService {
         if (modeloVeiculo != null) {
             motorista.setModeloVeiculo(modeloVeiculo);
         }  
-        if (precoViagem != 0) {
+        if (precoViagem != null) {
             motorista.setPrecoViagem(precoViagem);
-        }
-        if (statusOcupacao != null) {
-            motorista.setStatusOcupacao(statusOcupacao);
         }
 
         return motoristasRepository.save(motorista);

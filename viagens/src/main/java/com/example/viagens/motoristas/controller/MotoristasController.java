@@ -36,9 +36,8 @@ public class MotoristasController {
                                      @RequestParam(required = false) String cpf,
                                      @RequestParam(required = false) String placaVeiculo,
                                      @RequestParam(required = false) String modeloVeiculo,
-                                     @RequestParam(required = true) Double precoViagem,
-                                     @RequestParam(required = false) String statusOcupacao){
-        return motoristasService.editarMotorista(id, nome, cpf, placaVeiculo, modeloVeiculo, precoViagem, statusOcupacao);
+                                     @RequestParam(required = false) Double precoViagem){
+        return motoristasService.editarMotorista(id, nome, cpf, placaVeiculo, modeloVeiculo, precoViagem);
     }
 
     @GetMapping("motoristas/disponivel")
