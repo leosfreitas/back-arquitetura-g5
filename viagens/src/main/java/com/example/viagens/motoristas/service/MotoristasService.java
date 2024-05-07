@@ -61,24 +61,59 @@ public class MotoristasService {
         return motoristasRepository.save(motorista);
     }
 
-    public Motoristas retornaDisponivel(){
-        return motoristasRepository.findByStatusOcupacao("DISPONIVEL");
+    public Motoristas retornaDisponivel() {
+        for (Motoristas motorista : motoristasRepository.findAll()) {
+            if (motorista.getStatusOcupacao().equals("DISPONIVEL")) {
+                List<Motoristas> motoristas = motoristasRepository.findAll();
+                return motoristas.getFirst();
+            }
+        }
+        throw new RuntimeException("Nenhum motorista disponível!");
     }
 
-    public Motoristas mudaStatus(Integer id){
+    public String retornaDisponibilidade(Integer id){
+        Optional<Motoristas> motorista = motoristasRepository.findById(id);
+        if (motorista.isEmpty()){
+            throw new RuntimeException("Motorista não encontrado!");
+        }
+        if (motorista.get().getStatusOcupacao().equals("DISPONIVEL")){
+            return motorista.get().getStatusOcupacao();
+        }
+        else {
+            return motorista.get().getStatusOcupacao(); // INDISPONIVEL
+        }
+    }
+
+    public Motoristas mudaStatus(Integer id){ // SÓ INDISPONIVEL PARA DISPONIVEL
         Optional<Motoristas>  motorista = motoristasRepository.findById(id);
-        if(motorista.isEmpty()){
+        if (motorista.isEmpty()){
             throw new RuntimeException("Motorista não encontrado!");
 
         }
-        if(motorista.get().getStatusOcupacao().equals("DISPONIVEL")){
+        if (motorista.get().getStatusOcupacao().equals("DISPONIVEL")){
             throw new RuntimeException("Motorista já disponível!");
         }
-        else{
+        else {
             motorista.get().setStatusOcupacao("DISPONIVEL");
             return motoristasRepository.save(motorista.get());
         }
+    }
 
-
+    public Motoristas mudaStatusString(Integer id, String status){
+        Optional<Motoristas>  motorista = motoristasRepository.findById(id);
+        if (motorista.isEmpty()){
+            throw new RuntimeException("Motorista não encontrado!");
+        }
+        if (status.equals("DISPONIVEL") && motorista.get().getStatusOcupacao().equals("INDISPONIVEL")) {
+            motorista.get().setStatusOcupacao(status);
+            return motoristasRepository.save(motorista.get());
+        }
+        if (status.equals("INDISPONIVEL") && motorista.get().getStatusOcupacao().equals("DISPONIVEL")) {
+            motorista.get().setStatusOcupacao(status);
+            return motoristasRepository.save(motorista.get());
+        }
+        else {
+            throw new RuntimeException("Status inválido!");
+        }
     }
 }

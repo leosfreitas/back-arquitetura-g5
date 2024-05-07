@@ -46,9 +46,19 @@ public class MotoristasController {
         return motoristasService.retornaDisponivel();
     }
 
+    @GetMapping("motoristas/disponibilidade/{id}")
+    public String retornaDisponibilidade(@PathVariable Integer id){
+        return motoristasService.retornaDisponibilidade(id);
+    }
+
     @PutMapping("motoristas/{id}/status")
     public Motoristas mudaStatus(@PathVariable Integer id){
         return motoristasService.mudaStatus(id);
+    }
+
+    @PutMapping("motoristas/status/{id}/key/{status}")
+    public Motoristas mudaStatusKey(@PathVariable Integer id, @PathVariable String status){
+        return motoristasService.mudaStatusString(id, status);
     }
 
 }
